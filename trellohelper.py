@@ -40,7 +40,7 @@ def add_assignment_card(course: str, assignment):
         assignment.description = ''
 
     card_desc = format_card_description(course, assignment)
-    print(f"Creating '{assignment.name}'")
+    print(f"[{datetime.datetime.now()}] Creating '{assignment.name}'")
 
     client.get_list(list_id).add_card(
         name=assignment.name,
@@ -62,12 +62,12 @@ def add_assignments(course: str, assignments: list, card_filter: str = 'all'):
         if existing_card is None:
             add_assignment_card(course, assignment)
         elif existing_card.due[:16] != assignment.due_at[:16]:
-            print(f'Update due date on {assignment.name} from {existing_card.due} to {assignment.due_at}')
+            print(f'[{datetime.datetime.now()}] Update due date on {assignment.name} from {existing_card.due} to {assignment.due_at}')
             existing_card.set_due(assignment.due_at_date)
         # check if description has changed. [:-42] is to remove the timestamp before comparing
         elif existing_card.description[:-42] != format_card_description(course, assignment)[:-42]:
             existing_card.set_description(format_card_description(course, assignment))
-            print(f'Update description on {assignment.name}')
+            print(f'[{datetime.datetime.now()}] Update description on {assignment.name}')
 
 
 def delete_archived_assignments():
