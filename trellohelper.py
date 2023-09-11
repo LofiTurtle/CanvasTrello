@@ -25,7 +25,7 @@ def format_card_description(course: str, assignment):
 
     assignment_url = f'{CANVAS_API_URL}courses/{course}/assignments/{assignment.id}'
     # The description field has a 16,384 characters limit
-    return f'{assignment_url}\n{markdownify.markdownify(assignment.description)[:16_000 - len(assignment_url)]}`\n\nCard created: {now}`'
+    return f'{assignment_url}\n{markdownify.markdownify(assignment.description)[:16_000 - len(assignment_url)]}\n\n`Card created: {now}`'
 
 
 def add_assignment_card(course: str, assignment):
