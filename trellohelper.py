@@ -24,7 +24,7 @@ def format_card_description(course: str, assignment):
         assignment.description = ''
 
     assignment_url = f'{CANVAS_API_URL}courses/{course}/assignments/{assignment.id}'
-    return f'{assignment_url}\n{markdownify.markdownify(assignment.description)}`Card created: {now}`'
+    return f'{assignment_url}\n{markdownify.markdownify(assignment.description)[:16000 - len(assignment_url)]}`Card created: {now}`'
 
 
 def add_assignment_card(course: str, assignment):
